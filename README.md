@@ -111,7 +111,7 @@ The launch file was changed adding the following:
 * Launch of **Node (a)** with the script `acNode_a.py` with screen output.
 * Launch of **Node (b)** with the script `srvNode_b.py` with screen output.
 * Launch of **Node (c)** with the script `srvNode_c.py` with screen output.
-* Parameter for window size in **Node (c)** (i.e. the number of last velocity readings to averaging) set as 100.
+* Parameter `window size` to set the number of last velocity readings to averaging in **Node (c)**. Currently set as 100.
 
 # Other observations
 ## Main encountered difficulties
