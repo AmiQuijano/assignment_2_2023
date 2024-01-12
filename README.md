@@ -53,7 +53,7 @@ $ roslaunch assignment_2_2023 assignment1.launch
 ```
 # Assignment solution 
 ## Node (a)
-The code in the file `acNode_a.py` contains the following functctions and main explained as follows:
+The code in the file `acNode_a.py` contains the following functions and main explained as follows:
 
 Inside the class `ActionClient` the implemented functions are:
 
@@ -66,11 +66,11 @@ Arguments:
 Pseudocode:
 ```
 Function __initi__(self):
-  Initialize action-client the /reaching_goal server with the PlanningAction action type
-  Wait for the action-server to start
-  Initialize goal variable as a PlanningGoal message type to send to the action-server
-  Initialize subscriber for /odom topic with Odometry message type and odom_callback function
-  Initialize publisher named to publish in /PosVel topic the message of PosVel type
+    Initialize action-client the /reaching_goal server with the PlanningAction action type
+    Wait for the action-server to start
+    Initialize goal variable as a PlanningGoal message type to send to the action-server
+    Initialize subscriber for /odom topic with Odometry message type and odom_callback function
+    Initialize publisher named to publish in /PosVel topic the message of PosVel type
 ```
 ### `get_user_input(self)`
 This function asks the user for a goal coordinate or allows user to cancel current goal. 
@@ -81,20 +81,20 @@ Arguments:
 Pseudocode:
 ```
 Function get_user_input(self):
-  Print prompt for user input to enter goal coordinates or cancel the goal
-  Begin infinite loop:
-    If there is a user input:
-      If 'c', cancel the current goal
-      Else:
-        Try to:
-          Get goal coordinates from user input as two floats
-          Set goal coordinates in the goal message
-          Send the goal to the action-server with feedback_callback function
-        Except:
-          Display error message for invalid input
+    Print prompt for user input to enter goal coordinates or cancel the goal
+    Begin infinite loop:
+        If there is a user input:
+            If 'c', cancel the current goal
+        Else:
+            Try to:
+                Get goal coordinates from user input as two floats
+                Set goal coordinates in the goal message
+                Send the goal to the action-server with feedback_callback function
+            Except:
+                Display error message for invalid input
 ```
 ### `odom_callback(self, msg)`
-This function is a subscriber callback function that saves the x and y position and the x and z velocity from the /odom topic in a custom message and publishes it
+This function is a subscriber callback function that saves the x and y position and the x and z velocity from the `/odom` topic in a custom message and publishes it
 
 Arguments:
 * `self`: Instance of the class `ActionClient`.
@@ -103,9 +103,9 @@ Arguments:
 Pseudocode:
 ```
 Function odom_callback(self, msg):
-  Initialize custom_msg variable as a PosVel message type
-  Assign to custom_msg the x position, y position, the linear x velocity and angular z velocity from /odom
-  Publish the custom message
+    Initialize custom_msg variable as a PosVel message type
+    Assign to custom_msg the x position, y position, the linear x velocity and angular z velocity from /odom
+    Publish the custom message
 ```
 ### `feedback_callback(self, feedback)`
 This function is an action callback function that displays the feedback from the action-server 
@@ -119,17 +119,19 @@ Pseudocode:
 Funtion feedback_callback(self, feedback):
   Print feedback from the action-server
 ```
-In the `main`,
+In the main,
+### `__main__`
+Pseudocode:
 ```
 Main section:
-  Try to:
-    Initialize ROS action-client node
-    Create an object for the class ActionClient
-    Wait for 2 seconds
-    Display the prompt for the user to input target or cancel
-    Keep the script running until the node is shut down
-  Except:
-    Interrupt the ROS process
+    Try to:
+        Initialize ROS action-client node
+        Create an object for the class ActionClient
+        Wait for 2 seconds
+        Display the prompt for the user to input target or cancel by calling get_user_input function
+        Keep the script running until the node is shut down
+    Except:
+        Interrupt the ROS process
 ```
 For running this node, the custom message `PosVel.msg` was created which contains 4 components
 * **float64 x**: x-coordinate of the robot's position
@@ -138,8 +140,36 @@ For running this node, the custom message `PosVel.msg` was created which contain
 * **float64 vel_z**: angular velocity of the robot in the z-axis
 
 ## Node (b)
+The code in the file `srvNode_b.py` contains the following functions and main explained as follows:
+
+Inside the class `GetLastTargetService` the implemented functions are:
+
+### `__init__(self)`
+This function initializes the ROS service for getting the last target, the subscriber to the `/reaching_goal/goal` topic where the goal coordinates are sent and the variable `last_target` where the x and y coordinates of the last target sent will be saved and sent as a reponse from the service-server.
+
+Arguments:
+* `self`: Instance of the class `GetLastTargetService`.
+
+### `target_callback(self, msg)`
+This function is a subscriber callback function to update the `last_target` variable when a new target is received in the `/reaching_goal/goal` topic.
+
+Arguments:
+* `self`: Instance of the class `GetLastTargetService`.
+* `msg`: Message received in the `/reaching_goal/goal` topic
+
+### `handle_get_last_target(self, req)`
+This function is a service callback function to handle requests for the last target coordinates. It sends back a responde the last target coordinates and a boolean to state if the request was handled successfully or not.
+
+Arguments:
+* `self`: Instance of the class `GetLastTargetService`.
+* `req`: Request message sent to the server
+
+In the main,
+### `__main__`
+In the main the node is initialized and the class `get_last_target_server` is instantiated.
 
 ## Node (c)
+
 
 ## Launch file
 The launch file was changed adding the following:
