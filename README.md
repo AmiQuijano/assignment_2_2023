@@ -65,12 +65,12 @@ Arguments:
 
 Pseudocode:
 ```
-Function __initi__(self)
+Function __initi__(self):
   Initialize action-client the /reaching_goal server with the PlanningAction action type
   Wait for the action-server to start
   Initialize goal variable as a PlanningGoal message type to send to the action-server
   Initialize subscriber for /odom topic with Odometry message type and odom_callback function
-  Initialize publisher to publish in /PosVel topic the PosVel message
+  Initialize publisher named to publish in /PosVel topic the message of PosVel type
 ```
 ### `get_user_input(self)`
 This function asks the user for a goal coordinate or allows user to cancel current goal. 
@@ -80,31 +80,62 @@ Arguments:
 
 Pseudocode:
 ```
-Function get_user_input(self)
+Function get_user_input(self):
   Print prompt for user input to enter goal coordinates or cancel the goal
-  Behin infinite loop:
-    Check for user input:
-    If 'c', cancel the current goal
-                Else:
-                    Try to get goal coordinates from user input
-                    Set goal coordinates in the goal message
-                    Send the goal to the action server with feedback callback
-
-    Method odom_callback(msg):
-        Extract position and velocity information from /odom
-        Create custom message PosVel
-        Publish the custom message
-
-    Method feedback_callback(feedback):
-        Print feedback from the action server
-
-Main section:
-    Initialize ROS action-client node
-    Create an object of ActionClient
-    Wait for 2 seconds
-    Prompt user for input target
-    Keep the script running until the node is shut down
+  Begin infinite loop:
+    If there is a user input:
+      If 'c', cancel the current goal
+      Else:
+        Try to:
+          Get goal coordinates from user input as two floats
+          Set goal coordinates in the goal message
+          Send the goal to the action-server with feedback_callback function
+        Except:
+          Display error message for invalid input
 ```
+### `odom_callback(self, msg)`
+This function is a subscriber callback function that saves the x and y position and the x and z velocity from the /odom topic in a custom message and publishes it
+
+Arguments:
+* `self`: Instance of the class `ActionClient`.
+* `msg`: message received in the `/odom` topic
+
+Pseudocode:
+```
+Function odom_callback(self, msg):
+  Initialize custom_msg variable as a PosVel message type
+  Assign to custom_msg the x position, y position, the linear x velocity and angular z velocity from /odom
+  Publish the custom message
+```
+### `feedback_callback(self, feedback)`
+This function is an action callback function that displays the feedback from the action-server 
+
+Arguments:
+* `self`: Instance of the class `ActionClient`.
+* `feedback`: feedback received from the action-server
+
+Pseudocode:
+```
+Funtion feedback_callback(self, feedback):
+  Print feedback from the action-server
+```
+In the `main`,
+```
+Main section:
+  Try to:
+    Initialize ROS action-client node
+    Create an object for the class ActionClient
+    Wait for 2 seconds
+    Display the prompt for the user to input target or cancel
+    Keep the script running until the node is shut down
+  Except:
+    Interrupt the ROS process
+```
+For running this node, the custom message `PosVel.msg` was created which contains 4 components
+* **float64 x**: x-coordinate of the robot's position
+* **float64 y**: y-coordinate of the robot's position
+* **float64 vel_x**: linear velocity of the robot in the x-axis
+* **float64 vel_z**: angular velocity of the robot in the z-axis
 
 ## Node (b)
 
