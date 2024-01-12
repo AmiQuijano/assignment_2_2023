@@ -24,7 +24,8 @@ The ROS package *assignment_2_2023* containing all the files for this simulator 
 
 # Assignment description
 The task carried out was to write and add to the previously described package the necessary scripts, message and service files for creating the following 3 nodes:
-1. Create a node that implements an action-client, allowing the user to input in the terminal a target (x, y) or to cancel it. Use the feedback of the action-server to know when the target has been reached. The node also publishes the robot position and velocity as a custom message (x, y, vel_x, vel_z), by relying on the values published on the topic /odom.
-2. Create a service node that, when called, returns the coordinates of the last target sent by the user. 
-3. Create a service node that subscribes to the robot’s position and velocity (using the custom message) and implements a server to retrieve the distance of the robot from the target and the robot’s average speed. The size of the averaging window is set as a parameter in the launch file.
+1. **Node a)**: Create a node that implements an action-client, allowing the user to input in the terminal a target (x, y) or to cancel it. Use the feedback of the action-server to know when the target has been reached. The node also publishes the robot position and velocity as a custom message (x, y, vel_x, vel_z), by relying on the values published on the topic /odom.
+2. **Node b)**: Create a service node that, when called, returns the coordinates of the last target sent by the user. 
+3. **Node c)**: Create a service node that subscribes to the robot’s position and velocity (using the custom message) and implements a server to retrieve the distance of the robot from the target and the robot’s average speed. The size of the averaging window is set as a parameter in the launch file.
+
 As well as editing the .launch file to make these nodes run as well.
