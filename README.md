@@ -55,9 +55,9 @@ $ roslaunch assignment_2_2023 assignment1.launch
 ## Node (a)
 The code in the file `acNode_a.py` contains the following functctions and main explained as follows:
 
-### class ActionClient
 Inside the class `ActionClient` the implemented functions are:
-* **__init__(self)**
+
+### __init__(self)
 This function initialized the ROS action-client, subscriber, publisher and message as required
 
 Arguments:
