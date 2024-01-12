@@ -61,6 +61,7 @@ class GetDistSpeedService:
             
     def posvel_callback(self, msg):
     # Subscriber callback function to update the robot's position and velocity variables when a new message is received in the /PosVel topic
+    # Input msg: Message received in the /PosVel topic
 
         # Update the robot's current position
         self.posvel.x = msg.x

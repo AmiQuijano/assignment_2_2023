@@ -29,6 +29,7 @@ class GetLastTargetService:
 
     def target_callback(self, msg):
     # Subscriber callback function to update the last_target variable when a new target is received in the /reaching_goal/goal topic
+    # Input msg: Message from the /reaching_goal/goal topic
         
         # Save in last_target variable the x and y position message from /reaching_goal/goal topic
         if self.last_target == []:
@@ -42,6 +43,7 @@ class GetLastTargetService:
 
     def handle_get_last_target(self, req):
     # Service callback function to handle requests for the last target coordinates
+    # Input req: Request message sent to the server (in this case not used but is standard)
         
         # Create a response object using the custom service message type
         response = GetLastTargetResponse()  
@@ -66,7 +68,7 @@ if __name__ == '__main__':
         # Initialize the ROS node
         rospy.init_node('get_last_target_server')
     
-        # Instantiate the GetLastTargetServer class and start the ROS node
+        # Instantiate the GetLastTargetServer class
         get_last_target_service = GetLastTargetService()
     
         # Keep the script running until the node is shut down
