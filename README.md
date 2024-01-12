@@ -101,10 +101,19 @@ Main section:
     Prompt user for input target
     Keep the script running until the node is shut down
 ```
+
+## Node (b)
+
+## Node (c)
+
 ## Launch file
+The launch file was changed adding the following:
+* Launch of **Node (a)** with the script `acNode_a.py` with screen output.
+* Launch of **Node (b)** with the script `srvNode_b.py` with screen output.
+* Launch of **Node (c)** with the script `srvNode_c.py` with screen output.
+* Parameter for window size in **Node (c)** (i.e. the number of last velocity readings to averaging) set as 100.
 
-
-### Other observations
+# Other observations
 ## Main encountered difficulties
 
 ## Possible improvements
