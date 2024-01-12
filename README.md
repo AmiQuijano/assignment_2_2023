@@ -137,10 +137,6 @@ The user itself can confirm if the displayed target coordinate is indeed the las
 $ rosservice call /get_dist_speed
 ```
 
-# Other observations
-## Main encountered difficulties
-* 
-
 ## Possible improvements
 The solution implemented fullfills the requirements stated by the *Assignment description*. However, there are improvement opportunities to make the simulator clearer for the user or make it have more functionalities in case of user mistake:
 * **Goal mark in Gazebo**: It would be useful to have a visualization of the goal that the user has inputted in order to have a clear idea of where the robot is heading or whether or not it is heading/arriving to the goal.
