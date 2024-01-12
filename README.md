@@ -113,8 +113,33 @@ The launch file was changed adding the following:
 * Launch of **Node (c)** with the script `srvNode_c.py` with screen output.
 * Parameter `window size` to set the number of last velocity readings to averaging in **Node (c)**. Currently set as 100.
 
+## Visualization/Confirmation of nodes functionality
+To check that the nodes work optimally or to visualize the messages created:
+* **Feedback**: `actual_pose` and `status` feedbacks are visible automatically in the same terminal where the package was launched. To confirm the values are correct, in another terminal run
+```
+$ rostopic echo /reaching_goal/feedback
+```
+* **(x, y, vel_x, vel_y) custom messages**: To visualize the custom messages `PosVel` published in the topic `/PosVel`, open another terminal and run
+```
+$ rostopic echo /PosVel
+```
+To confirm that these values are correctly obtained from the `/odom` topic, in another terminal run
+```
+$ rostopic echo /odom
+```
+* **Last target**: To visualize the last target sent by the user it is necessary to call the service `/get_last_target` in order to get the responds. For this, open a new terminal and run
+```
+$ rosservice call /get_last_target
+```
+The user itself can confirm if the displayed target coordinate is indeed the last one inputted.
+* **Distance from target and average speed**: To visualize the distance from the target and average speed it is necessary to call the service `/get_dist_speed` in order to get the response. For this, open a new terminal and run
+```
+$ rosservice call /get_dist_speed
+```
+
 # Other observations
 ## Main encountered difficulties
+* 
 
 ## Possible improvements
 The solution implemented fullfills the requirements stated by the *Assignment description*. However, there are improvement opportunities to make the simulator clearer for the user or make it have more functionalities in case of user mistake:
