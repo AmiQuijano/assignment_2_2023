@@ -148,20 +148,20 @@ Inside the class `GetLastTargetService` the implemented functions are:
 This function initializes the ROS service for getting the last target, the subscriber to the `/reaching_goal/goal` topic where the goal coordinates are sent and the variable `last_target` where the x and y coordinates of the last target sent will be saved and sent as a reponse from the service-server.
 
 Arguments:
-* `self`: Instance of the class `GetLastTargetService`.
+* `self`: Instance of the class `GetLastTargetService`
 
 ### `target_callback(self, msg)`
 This function is a subscriber callback function to update the `last_target` variable when a new target is received in the `/reaching_goal/goal` topic.
 
 Arguments:
-* `self`: Instance of the class `GetLastTargetService`.
+* `self`: Instance of the class `GetLastTargetService`
 * `msg`: Message received in the `/reaching_goal/goal` topic
 
 ### `handle_get_last_target(self, req)`
 This function is a service callback function to handle requests for the last target coordinates. It sends back a responde the last target coordinates and a boolean to state if the request was handled successfully or not.
 
 Arguments:
-* `self`: Instance of the class `GetLastTargetService`.
+* `self`: Instance of the class `GetLastTargetService`
 * `req`: Request message sent to the server
 
 In the main,
@@ -169,7 +169,36 @@ In the main,
 In the main the node is initialized and the class `get_last_target_server` is instantiated.
 
 ## Node (c)
+The code in the file `srvNode_c.py` contains the following functions and main explained as follows:
 
+Inside the class `GetDistSpeedService` the implemented functions are:
+
+### `__init__(self)`
+This function initializes the ROS service for getting the distance from the target and the average velocity, the subscriber to the `/reaching_goal/goal` topic where the goal coordinates are sent, the subscriber to the `/PosVel` topic where the (x, y, vel_x, vel_y) custom messages arrive, and the variables `last_target`, `posvel` of PosVel message type, `window size` obtained from the parameter, and the queue variables to store the last N velocities.
+
+Arguments:
+* `self`: Instance of the class `GetLastTargetService`.
+
+### `target_callback(self, msg)`
+This function is a subscriber callback function to update the `last_target` variable when a new target is received in the `/reaching_goal/goal` topic.
+
+Arguments:
+* `self`: Instance of the class `GetLastTargetService`
+* `msg`: Message received in the `/reaching_goal/goal` topic
+
+### `posvel_callback(self, msg)`
+This function is a subscriber callback function to update the robot's position and velocity variables when a new message is received in the /PosVel topic
+
+Arguments:
+* `self`: Instance of the class `GetLastTargetService`
+* `msg`: Message received in the `/PosVel` topic
+
+### `handle_get_dist_speed(self, req)`
+This function is a service callback function to handle requests for the last target coordinates. It sends back a responde the last target coordinates and a boolean to state if the request was handled successfully or not.
+
+Arguments:
+* `self`: Instance of the class `GetLastTargetService`
+* `req`: Request message sent to the server
 
 ## Launch file
 The launch file was changed adding the following:
