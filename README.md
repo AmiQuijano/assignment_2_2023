@@ -31,10 +31,17 @@ The task carried out was to write and add to the previously described package th
 As well as editing the .launch file to make these nodes run as well.
 
 # Installing and Running
-The simlator and its files require Ubuntu 20.04, Python 3 (already installed within Ubuntu 20.04) and ROS Noetic. 
+The simlator and its files require Ubuntu 20.04, Python 3 (already installed within Ubuntu 20.04) and ROS Noetic. If ROS Noetic is not yet installed in your Ubuntu system follow the steps found in the [Ubuntu install of ROS Noetic ](http://wiki.ros.org/noetic/Installation/Ubuntu) making sure to install the *Desktop-full* version.
 
-If ROS Noetic is not yet installed in your Ubuntu system follow the steps found in the [Ubuntu install of ROS Noetic ](http://wiki.ros.org/noetic/Installation/Ubuntu) making sure to install the *Desktop-full* version.
-
-To download the simulator, install git and close this repository:
+To download the simulator, install git and clone this repository in the *src* folder of your *ROS workspace*. Create it if you don't have one by following the [Create a Workspace tutorial](http://wiki.ros.org/catkin/Tutorials/create_a_workspace):
 ```
-$ git clone 
+$ git clone https://github.com/AmiQuijano/RT1_ROS_assignment.git
+```
+Once all the dependencies are installed,
+
+1. Open a terminal and start ROS
+```$ roscore```
+2. Open another terminal and build the workspace
+```$ catkin_make```
+3. Launch the simulation with the roslaunch command
+```$ roslaunch assignment_2_2023 assignment1.launch```
