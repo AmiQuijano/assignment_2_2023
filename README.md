@@ -166,7 +166,12 @@ Arguments:
 
 In the main,
 ### `__main__`
-In the main the node is initialized and the class `get_last_target_server` is instantiated.
+In the main the node is initialized and the class `GetLastTargetService` is instantiated.
+
+For running this node, the custom service message `GetLastTarget.srv` was created which contains no request message and 3 responses:
+* **float64 x**: x-coordinate of the last target
+* **float64 y**: y-coordinate of the last target
+* **bool success**: Indicates if the request was successful
 
 ## Node (c)
 The code in the file `srvNode_c.py` contains the following functions and main explained as follows:
@@ -194,11 +199,24 @@ Arguments:
 * `msg`: Message received in the `/PosVel` topic
 
 ### `handle_get_dist_speed(self, req)`
-This function is a service callback function to handle requests for the last target coordinates. It sends back a responde the last target coordinates and a boolean to state if the request was handled successfully or not.
+This function is a service callback function to handle requests to send as a response the robot's distance from the target and average speed.
 
 Arguments:
 * `self`: Instance of the class `GetLastTargetService`
 * `req`: Request message sent to the server
+
+In the main,
+### `__main__`
+In the main the node is initialized and the class `GetDistSpeedService` is instantiated.
+
+For running this node, the custom service message `GetDistSpeed.srv` was created which contains no request message and 7 responses:
+* **float64 dist_x**: distance in x-axis from the robot's position to the target
+* **float64 dist_y**: distance in y-axis from the robot's position to the target
+* **float64 dist_eucl**: Euclidean distance from the robot's position to the target
+* **bool success_dist**: Indicates if the request was successful for calculating the distance
+* **float64 avg_vel_x**: average linear speed in x-axis
+* **float64 avg_vel_z**: average angular speed in z-axis
+* **bool success_avg_vel**: Indicates if the request was successful for calculating the velocity
 
 ## Launch file
 The launch file was changed adding the following:
