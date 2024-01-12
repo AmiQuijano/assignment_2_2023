@@ -31,4 +31,10 @@ The task carried out was to write and add to the previously described package th
 As well as editing the .launch file to make these nodes run as well.
 
 # Installing and Running
-The simlator and its files use Ubuntu 20.04, Python 3 (already installed within Ubuntu 20.04) and ROS Noetic. If ROS Noetic is not yet installed in your Ubuntu system follow the steps found in the [Ubuntu install of ROS Noetic ](http://wiki.ros.org/noetic/Installation/Ubuntu) making sure to install the *Desktop-full* version.
+The simlator and its files require Ubuntu 20.04, Python 3 (already installed within Ubuntu 20.04) and ROS Noetic. 
+
+If ROS Noetic is not yet installed in your Ubuntu system follow the steps found in the [Ubuntu install of ROS Noetic ](http://wiki.ros.org/noetic/Installation/Ubuntu) making sure to install the *Desktop-full* version.
+
+To download the simulator, install git and close this repository:
+```
+$ git clone 
