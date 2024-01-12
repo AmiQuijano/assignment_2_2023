@@ -17,8 +17,8 @@ The ROS package *assignment_2_2023* containing all the files for this simulator 
 ### Folders description
 * **world**: Contains the .world file corresponding to the information to load the environment or arena where the robot will navigate in Gazebo.
 * **urdf**: Contains files describing the control and structure of the robot including information regarding joints and links and their position, orientation, dynamics, among others.
-* **scripts**: There are 3 already given Pyhton scripts, *wall_follow_service.py*, *bug_as.py* and *go_to_point_service*. These work together to make the robot move towards a goal sent by an action-client, making the robot head towards the goal but also follow obstacles until it can again heards the goal (surroung wall until there isn't wall anymore).
-* **action**: Contains the .action file used by the action-server *bug_as.py*.
+* **scripts**: There are 3 already given Pyhton scripts, `wall_follow_service.py`, `bug_as.py` and `go_to_point_service.py`. These work together to make the robot move towards a goal sent by an action-client, making the robot head towards the goal but also follow obstacles until it can again heards the goal (surroung wall until there isn't wall anymore).
+* **action**: Contains the .action file used by the action-server `bug_as.py`.
 * **launch**: Contains the .launch file which executes the nodes (i.e. the .py scripts) as well as the simulation environments
 * **config**: Contains .rviz files which store the configuration settings, layouts and displays used by RViz.
 
@@ -40,8 +40,75 @@ $ git clone https://github.com/AmiQuijano/RT1_ROS_assignment.git
 Once all the dependencies are installed,
 
 1. Open a terminal and start ROS
-```$ roscore```
+```
+$ roscore
+```
 2. Open another terminal and build the workspace
-```$ catkin_make```
+```
+$ catkin_make
+```
 3. Launch the simulation with the roslaunch command
-```$ roslaunch assignment_2_2023 assignment1.launch```
+```
+$ roslaunch assignment_2_2023 assignment1.launch
+```
+# Assignment solution 
+## Node (a)
+The code in the file `acNode_a.py` contains the following functctions and main explained as follows:
+
+### class ActionClient
+Inside the class `ActionClient` the implemented functions are:
+* **__init__(self)**
+This function initialized the ROS action-client, subscriber, publisher and message as required
+
+Arguments:
+* `self`: Instance of the class `ActionClient`.
+
+Pseudocode:
+```
+Function __initi__(self)
+  Initialize action-client the /reaching_goal server with the PlanningAction action type
+  Wait for the action-server to start
+  Initialize goal variable as a PlanningGoal message type to send to the action-server
+  Initialize subscriber for /odom topic with Odometry message type and odom_callback function
+
+
+  Create goal message for the action server
+        Subscribe to /odom topic for robot position and velocity
+        Create publisher for custom message /PosVel
+
+    Method get_user_input():
+        Print prompt for user input
+        Infinite loop:
+            Check for user input:
+                If 'c', cancel the current goal
+                Else:
+                    Try to get goal coordinates from user input
+                    Set goal coordinates in the goal message
+                    Send the goal to the action server with feedback callback
+
+    Method odom_callback(msg):
+        Extract position and velocity information from /odom
+        Create custom message PosVel
+        Publish the custom message
+
+    Method feedback_callback(feedback):
+        Print feedback from the action server
+
+Main section:
+    Initialize ROS action-client node
+    Create an object of ActionClient
+    Wait for 2 seconds
+    Prompt user for input target
+    Keep the script running until the node is shut down
+```
+## Launch file
+
+
+### Other observations
+## Main encountered difficulties
+
+## Possible improvements
+The solution implemented fullfills the requirements stated by the *Assignment description*. However, there are improvement opportunities to make the simulator clearer for the user or make it have more functionalities in case of user mistake:
+* **Goal mark in Gazebo**: It would be useful to have a visualization of the goal that the user has inputted in order to have a clear idea of where the robot is heading or whether or not it is heading/arriving to the goal.
+* **Error message for unreachable goals**: It would be more user-friendly and time-saving to have an error message in the terminal if the user inputs a goal coordinate that is unreachable by the robot given the used world's limits (in case the world is an enclosed arena like the one used in this simulation). This would avoid having the user cancel the goal until realizing that the robot cannot reach it. The cancel option should still be kept in case the user wants to cancel the current inputted goal.
+* **Launch files for opening useful terminals**: It would be very useful to have 
