@@ -57,7 +57,7 @@ The code in the file `acNode_a.py` contains the following functctions and main e
 
 Inside the class `ActionClient` the implemented functions are:
 
-### __init__(self)
+### `__init__(self)`
 This function initialized the ROS action-client, subscriber, publisher and message as required
 
 Arguments:
@@ -70,17 +70,21 @@ Function __initi__(self)
   Wait for the action-server to start
   Initialize goal variable as a PlanningGoal message type to send to the action-server
   Initialize subscriber for /odom topic with Odometry message type and odom_callback function
+  Initialize publisher to publish in /PosVel topic the PosVel message
+```
+### `get_user_input(self)`
+This function asks the user for a goal coordinate or allows user to cancel current goal. 
 
+Arguments:
+* `self`: Instance of the class `ActionClient`.
 
-  Create goal message for the action server
-        Subscribe to /odom topic for robot position and velocity
-        Create publisher for custom message /PosVel
-
-    Method get_user_input():
-        Print prompt for user input
-        Infinite loop:
-            Check for user input:
-                If 'c', cancel the current goal
+Pseudocode:
+```
+Function get_user_input(self)
+  Print prompt for user input to enter goal coordinates or cancel the goal
+  Behin infinite loop:
+    Check for user input:
+    If 'c', cancel the current goal
                 Else:
                     Try to get goal coordinates from user input
                     Set goal coordinates in the goal message
